@@ -1,0 +1,70 @@
+version: '3.9'
+services:
+  core:
+    image: f1a622012153a121f368ab1c6611f40fc9cdede2371a5824e9e8ee5e9ba298e1
+    container_name: core
+    depends_on:
+      - cache
+      - search
+
+  users:
+    image: b0237cb2a311db73b502b67fac8b04a9b75f7785d33671c59ff2aee317b494ee
+    container_name: users
+    depends_on:
+      - cache
+      - core
+
+  company:
+    image: 731f99a86d1a0aff3cd6cc133fd1c0f12a03b88b45702ad21cfd250fb170b969
+    container_name: company
+    depends_on:
+      - cache
+      - core
+
+  # statistics:
+  #   image: kambang/zenou-statistics
+  #   container_name: statistics
+  #   depends_on:
+  #     - cache
+  #     - core
+
+  # assessments:
+  #   image: kambang/zenou-assessments
+  #   container_name: assessments
+  #   depends_on:
+  #     - cache
+  #     - core
+
+  subscriptions:
+    image: 5e595958b1e9f60b438c5cf938967c8529f10f38e72b3a6dc846e58954496d1b
+    container_name: subscriptions
+    depends_on:
+      - cache
+      - core
+
+  # communication:
+  #   image: kambang/zenou-communication
+  #   container_name: communication
+  #   depends_on:
+  #     - cache
+  #     - core
+
+  cache:
+    image: redis
+    container_name: cache
+
+  search:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.6.0
+    container_name: search
+    environment:
+      - node.name=search
+      - discovery.type=single-node
+    ports:
+      - 9200:9200
+
+  gateway-proxy:
+    image: nginx
+    container_name: gateway-proxy
+
+# volumes:
+#   - searchData:/usr/share/elasticsearch/data
