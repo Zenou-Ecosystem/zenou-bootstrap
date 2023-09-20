@@ -21,10 +21,11 @@ services:
   cache:
     image: redis
     container_name: cache
-  
+
   database:
     image: mongo
     restart: always
+    container_name: database
     environment:
       MONGO_INITDB_ROOT_USERNAME: zenou
       MONGO_INITDB_ROOT_PASSWORD: zenou_admin$C1jo00#!
