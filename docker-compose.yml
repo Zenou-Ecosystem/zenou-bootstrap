@@ -2,6 +2,7 @@ version: '3.9'
 services:
   company:
     image: kambang/zenou:company
+    restart: always
     container_name: company
     depends_on:
       - cache
@@ -10,6 +11,7 @@ services:
 
   users:
     image: kambang/zenou:users
+    restart: always
     container_name: users
     depends_on:
       - cache
@@ -25,7 +27,8 @@ services:
     restart: always
     environment:
       MONGO_INITDB_ROOT_USERNAME: zenou
-      MONGO_INITDB_ROOT_PASSWORD: admin$C1jo00#!
+      MONGO_INITDB_ROOT_PASSWORD: zenou_admin$C1jo00#!
+      MONGO_INITDB_DATABASE: zenou_db
 
   mongo-express:
     image: mongo-express
@@ -33,9 +36,9 @@ services:
     ports:
       - 8081:8081
     environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: root
-      ME_CONFIG_MONGODB_ADMINPASSWORD: admin$C1jo00#!
-      ME_CONFIG_MONGODB_URL: mongodb://zenou:admin$C1jo00#!@database:27017/
+      ME_CONFIG_MONGODB_ADMINUSERNAME: zenou
+      ME_CONFIG_MONGODB_ADMINPASSWORD: zenou_admin$C1jo00#!
+      ME_CONFIG_MONGODB_URL: mongodb://zenou:zenou_admin$C1jo00#!@database:27017/zenou_db
 
   search:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.6.0
