@@ -28,7 +28,7 @@ services:
     container_name: database
     command: [--auth]
     environment:
-      MONGO_INITDB_ROOT_USERNAME: zenou
+      MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: admin$C1jo00#!
       MONGO_INITDB_DATABASE: zenou_db
     
@@ -39,9 +39,9 @@ services:
     ports:
       - 8081:8081
     environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: zenou
+      ME_CONFIG_MONGODB_ADMINUSERNAME: admin
       ME_CONFIG_MONGODB_ADMINPASSWORD: admin$C1jo00#!
-      ME_CONFIG_MONGODB_URL: mongodb://zenou:admin$C1jo00#!@database:27017/
+      ME_CONFIG_MONGODB_URL: mongodb://admin:admin$C1jo00#!@database:27017/
 
   search:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.6.0
