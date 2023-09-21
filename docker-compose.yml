@@ -6,7 +6,7 @@ services:
     restart: always
     container_name: company
     depends_on:
-      - cache
+      # - cache
       - database
       - search
 
@@ -15,13 +15,13 @@ services:
     restart: always
     container_name: users
     depends_on:
-      - cache
+      # - cache
       - database
       - search
 
-  cache:
-    image: redis
-    container_name: cache
+  # cache:
+  #   image: redis
+  #   container_name: cache
 
   database:
     image: mongo
@@ -45,6 +45,9 @@ services:
     environment:
       - node.name=search
       - discovery.type=single-node
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    volumes:
+      - data:/usr/share/elasticsearch/data
     ports:
       - 9200:9200
   
