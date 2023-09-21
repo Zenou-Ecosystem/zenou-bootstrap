@@ -42,7 +42,7 @@ services:
       ME_CONFIG_MONGODB_URL: mongodb://database:27017/
 
   search:
-    image: docker.elastic.co/elasticsearch/elasticsearch:8.6.0
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.5.2
     container_name: search
     environment:
       - node.name=search
